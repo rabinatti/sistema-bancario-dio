@@ -31,16 +31,12 @@ def depositar():
 
                 print(" ")
                 print(f"O valor R$ {valor_depositado:.2f} foi depositado")
-                print(" ")
-                print(f"numero_depositso {numero_depositos}")
 
                 deposito.append(valor_depositado)
                 numero_depositos += 1
                 saldo += valor_depositado
 
                 print(f"Seu saldo agora é de: R$ {saldo:.2f}")
-                print(" ")
-                print(f"numero_depositso {numero_depositos}")
 
                 input("Pressione enter para continuar")
                 break
@@ -55,23 +51,59 @@ def sacar():
     global numero_saques, LIMITE_SAQUE, LIMITE_SAQUES_DIARIO, saque, saldo
 
     while True:
-        try:
-            valor_saque = float(input("Qual o valor o senhor gostaria de sacar?"))
-        except ValueError:
-            print("Por favor, digite um núemro válido")
-            
-while True:
-    menu_opcao = int(input(menu))
+        if numero_saques < LIMITE_SAQUES_DIARIO:
+            try:
+                valor_saque = float(input("Qual o valor o senhor gostaria de sacar? "))
 
-    if menu_opcao == 1:
+                if (valor_saque > 0.00 and (valor_saque <= LIMITE_SAQUE) and (valor_saque <= saldo)):
+
+                    saque.append(valor_saque)
+                    numero_saques += 1
+                    saldo -= valor_saque
+
+                    print(f"Valor de {valor_saque:.2f} foi sacado, por favor, retire seu dinheiro")
+                    print(f"Seu saldo agora é de: RS {saldo:.2f}")
+
+                    input("Pressione enter para continuar")
+                    break
+
+                else:
+
+                    if valor_saque > saldo:
+                        print(" ")
+                        print(f"Saldo insulficiente, seu saldo é de {saldo:.2f}.")
+                        input("Pressione enter para continuar")
+                        break
+
+                    elif valor_saque > LIMITE_SAQUE:
+                        print(" ")
+                        print(f"O limite de saque é de: {LIMITE_SAQUE}, por favor, escolha um valor abaixo desse limite")
+                        input("Pressione enter para continuar")
+                        break
+                            
+                    elif valor_saque <= 0.00:
+                        print(" ")
+                        print("Valor inválido, por favor, tente novamente")
+                        input("Pressione enter para continuar")
+                        break
+
+            except ValueError:
+                print("Por favor, digite um núemro válido")
+        else:
+            print(f"O limite de saques diários é de {LIMITE_SAQUES_DIARIO}, você já ultrapassou esse limite hoje")
+            break 
+
+while True:
+    menu_opcao = input(menu)
+
+    if menu_opcao == "1":
         print("Extrato")
         break
-    elif menu_opcao == 2:
+    elif menu_opcao == "2":
         depositar()
-    elif menu_opcao == 3:
-        print("Sacar")
-        break
-    elif menu_opcao == 4:
+    elif menu_opcao == "3":
+        sacar()
+    elif menu_opcao == "4":
         print("Obrigado por utilizar nossos serviços. Volte sempre!")
         break
     else:
