@@ -22,3 +22,10 @@ Essa operação deve listar todos os depósitos e saques realizados na conta. No
 Os valores devem ser exibidos utilizando o formato R$ xxx.xx, exemplo:
 
 1500.45 = R$ 1500.45
+
+## Mudanças realizadas
+Para esse projeto, realizei algumas mudanças, como:
+
+ - A criação e a chamada de métodos, ao invés de escrever o codigo todo no menu incial como era aoresentado no template. Para isso fiz pesquisas de como criar e chamar métodos utilizando o Python.
+
+ - Na hora que o usuário digitasse um valor para sacar ou depositar, ele deveria digitar um valor do tipo **float**, se o usuário digitasse alguma letra ou **string**, o programa retornava um erro e travava. Para impedir isso fiz uma pesquisa e utilizei o método **try/except** para que caso o usúario digitasse um valor inválido, o programa iria exibir uma mensagem de erro, e iria reiniciar a operação para que o usuário pudesse então digitar um valor válido.
